@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+   
+    <!-- 
+
+        <i class="fa-solid fa-eye-slash"></i>
+        <i class="fa-solid fa-eye"></i>
+     -->
+    <form action="">
+        <label for="">username</label> <br>
+        <input id="userName" type="text"> <br>
+        <span id="showError" style="color: red;display: none;"> error </span> <br>
+        <label for="">email</label>
+        <input id="email" type="text"> <br>
+        <label for="">password</label>
+        <input id="password" type="text"> <br>
+        <label for="">confirm password</label>
+        <input id="confirmPassword" type="text"> <br>
+        <button onclick="registerUser(event)"> register</button>
+        <p> bạn đã có tài khoản <a href="./login.html">login?</a></p>
+    </form>
+    <script>
+       
+        
+        function uuid() {
+
+            let result= Math.floor(Math.random()*9999999999999) + new Date().getMilliseconds();
+            return result;
+        }
+      
+        let listUsers =JSON.parse(localStorage.getItem("listUsers")) ??[];
+      
+        function registerUser(e) {
+            e.preventDefault();
+            // document.getElementById("showError").style.display="block";
+            let userName=document.getElementById("userName").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+            let userInfor={
+                name:userName,
+                email:email,
+                password:password,
+                id:uuid(),
+            }
+            if(password==confirmPassword){
+                listUsers.push(userInfor);
+                localStorage.setItem("listUsers",JSON.stringify(listUsers));
+                // chuyển sang trang đăng nhập
+                window.location.href="./login.html"
+            }
+          
+        }
+    </script>
+</body>
+
+</html>
